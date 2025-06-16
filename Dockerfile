@@ -1,4 +1,6 @@
 
+
+
 FROM node:22-slim AS base
 
 ENV PNPM_HOME="/pnpm"
@@ -20,5 +22,8 @@ COPY --from=prod-deps /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist
 
 EXPOSE 3333
+
+ARG FIGMA_API_KEY
+ENV FIGMA_API_KEY=${FIGMA_API_KEY}
 
 CMD ["pnpm","start"]
